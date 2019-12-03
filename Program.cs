@@ -1,18 +1,23 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Text.Json;
+
 namespace creadir
 {
-    class Producto 
+   public class Producto 
     {
-        public string codigo;
-        public string descripcion;
-        public double precio;
+        public string codigo { get; set; }
+        public string descripcion { get; set; }
+        public double precio { get; set; }
 
         public Producto(string c,string d,double p)
         {
             codigo = c; descripcion = d; precio = p;
         }
+
+        public Producto()
+        {}
     }
 
     class ProductoArchivo
@@ -47,11 +52,12 @@ namespace creadir
         public static List<Producto> LeeProductosBIN(string archivo)
         {
             List<Producto> productos = new List<Producto>();
-            FileStream 
-            using( StreamReader sr = new StreamReader(archivo))
+            FileStream fs = new FileStream(archivo , FileMode.Open, FileAccess.Read);
+
+            using( BinaryReader binIn = new BinaryReader(fs))
             {
 
-                while(binIn.PeakChar() != 1 ) // No llegaremos al dinal del archivo
+                while(binIn.PeekChar() != 1 ) // No llegaremos al dinal del archivo
               {
                    Producto producto = new Producto();
                    producto.codigo = binIn.ReadString();
@@ -64,11 +70,30 @@ namespace creadir
             }
             return productos;
         }
-    }
 
-    class Program
-    {
-        static void Main(string[] args)
+        public static List<Producto> LeeProductosTXT(string archivo)
+        {
+        List<Producto> productos = new List<Producto>();        
+        using( StreamReader sr = new StreamReader(archivo))
+        {
+            string line = "";
+            while(  (line =  sr.ReadLine()) != null ) // No lleguemos al final del archivo
+            {
+                string[] columnas = line.Split('|');
+            
+                productos.Add( new Producto(columnas[0],columnas[1], Double.Parse( columnas[2])) );
+
+            }
+
+        }
+        return productos;
+        }
+     }
+     
+
+     class Program
+     {
+         static void Main(string[] args)
         {
             List<Producto> productos = new List<Producto>();
             productos.Add(new Producto("AQW","Lapiz Azul w2", 12.23d));
@@ -76,19 +101,46 @@ namespace creadir
             productos.Add(new Producto("AQW","Pluma Azul w2", 22.23d));
             productos.Add(new Producto("AQW","Borrador Azul w2", 22.23d));
 
+
+            // Specify the data source.
+        
+
+        // Define the query expression.
+        IEnumerable<Producto> productoQuery =
+            from p in productos 
+            where p.precio > 80
+            orderby p.descripcion
+            select p;
+
+        IEnumerable<Producto> productoQuery2 =  productos.Select(p => p).Where( p => p.precio > 80).OrderBy(p => p.descripcion);
+
+            // Execute the query.
+        foreach (Producto p in productoQuery)
+         {
+            Console.WriteLine(p.descripcion + " ");
+         }
+             /*
+           foreach(Producto p in productos)
+           {    
+             Console.WriteLine("{0} {1} {2}", p.codigo,p.descripcion,p.precio);
+           }
+   
+          var jsonString = JsonSerializer.Serialize(productos);
+          File.WriteAllText("fileName.json", jsonString);
+          Console.WriteLine(jsonString);
+            */ 
+
+
+
+
+            /*
             ProductoArchivo.EscribeProductosBIN(@"productos.bin", productos);
 
             Console.WriteLine("Archivo Grabado");
             Console.ReadKey();
 
             List<Producto> productos_leidos = ProductoArchivo.LeeProductosBIN();
-            FileStream 
-            using( StreamReader sr = new StreamReader(archivo))
-            {
-
-                while(binIn.PeakChar() != 1 ) // No llegaremos al dinal del archivo
-              {
-
+            */
                 /*foreach(Producto p in productos)
                 {
 
