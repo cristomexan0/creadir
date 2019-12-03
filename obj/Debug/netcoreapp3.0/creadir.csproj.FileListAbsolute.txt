@@ -1,0 +1,11 @@
+C:\Users\ITT\Documents\POO\creadir\bin\Debug\netcoreapp3.0\creadir.exe
+C:\Users\ITT\Documents\POO\creadir\bin\Debug\netcoreapp3.0\creadir.deps.json
+C:\Users\ITT\Documents\POO\creadir\bin\Debug\netcoreapp3.0\creadir.runtimeconfig.json
+C:\Users\ITT\Documents\POO\creadir\bin\Debug\netcoreapp3.0\creadir.runtimeconfig.dev.json
+C:\Users\ITT\Documents\POO\creadir\bin\Debug\netcoreapp3.0\creadir.dll
+C:\Users\ITT\Documents\POO\creadir\bin\Debug\netcoreapp3.0\creadir.pdb
+C:\Users\ITT\Documents\POO\creadir\obj\Debug\netcoreapp3.0\creadir.csprojAssemblyReference.cache
+C:\Users\ITT\Documents\POO\creadir\obj\Debug\netcoreapp3.0\creadir.AssemblyInfoInputs.cache
+C:\Users\ITT\Documents\POO\creadir\obj\Debug\netcoreapp3.0\creadir.AssemblyInfo.cs
+C:\Users\ITT\Documents\POO\creadir\obj\Debug\netcoreapp3.0\creadir.dll
+C:\Users\ITT\Documents\POO\creadir\obj\Debug\netcoreapp3.0\creadir.pdb
